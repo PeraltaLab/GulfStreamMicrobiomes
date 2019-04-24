@@ -48,29 +48,43 @@ tax_raw <- read.delim("../data/phylotype/GS.trim.contigs.trim.good.unique.good.f
 
 # OTU Data Wrangling
 ```{r}
+# Groupings
+cyanos <- tax.in$OTU[grep("Cyano", tax.in$Phylum)]
+heteros <- tax.in$OTU[grep("Cyano", tax.in$Phylum, invert = T)]
+
 # Remove OTUs with less than two occurences across all sites
 otus <- otu.in[, which(colSums(otu.in) >= 2)]
 
 # Make Presence Absence Matrix
 dataPA <- (otus > 0) * 1
+dataPA.c <- dataPA[, which(colnames(dataPA) %in% cyanos)]
+dataPA.h <- dataPA[, which(colnames(dataPA) %in% heteros)]
 
 # Make Relative Abundence Matrices
+otus.c <- otus[, which(colnames(otus) %in% cyanos)]
+otus.h <- otus[, which(colnames(otus) %in% heteros)]
+
 dataREL <- otus
 for(i in 1:dim(otus)[1]){
   dataREL[i,] <- otus[i,]/sum(otus[i,])
 }
 
+dataREL.c <- otus.c
+for(i in 1:dim(otus.c)[1]){
+  dataREL.c[i,] <- otus.c[i,]/sum(otus.c[i,])
+}
+
+dataREL.h <- otus.h
+for(i in 1:dim(otus.h)[1]){
+  dataREL.h[i,] <- otus.h[i,]/sum(otus.h[i,])
+}
+
 # Log Transform Relative Abundances
 dataREL.log <- decostand(dataREL, method="log")
 
-cyanos <- tax.in$OTU[grep("Cyano", tax.in$Phylum)]
-heteros <- tax.in$OTU[grep("Cyano", tax.in$Phylum, invert = T)]
-
-dataPA.c <- dataPA[, which(colnames(dataPA) %in% cyanos)]
-dataPA.h <- dataPA[, which(colnames(dataPA) %in% heteros)]
-
-dataREL.c <- dataREL[, which(colnames(dataREL) %in% cyanos)]
-dataREL.h <- dataREL[, which(colnames(dataREL) %in% heteros)]
+# Backup: Rel before split
+dataREL.c2 <- dataREL[, which(colnames(dataREL) %in% cyanos)]
+dataREL.h2 <- dataREL[, which(colnames(dataREL) %in% heteros)]
 ```
 
 # Alpha Diversity
