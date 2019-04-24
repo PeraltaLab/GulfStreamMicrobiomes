@@ -1,0 +1,45 @@
+---
+title: "Gulf Stream Microbes"
+author: "Ariane L. Peralta, Mario E. Muscarella, ..."
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+header-includes:
+   - \usepackage{array}
+   - \usepackage{graphics}
+output: 
+  pdf_document:
+    fig_caption: true
+---
+
+# Project Description:
+
+# Initial Setup
+```{r results='hide', message=FALSE}
+rm(list=ls()) 
+setwd("~/GitHub/GulfStreamMicrobiomes/analyses/")
+
+# Simple Functions
+se <- function(x, ...){sd(x, na.rm = TRUE)/sqrt(length(na.omit(x)))}
+sem <- function(x){sd(na.omit(x))/sqrt(length(na.omit(x)))}
+CV <- function(x, ...){(sd(x, na.rm = TRUE)/mean(x, na.rm = TRUE))*100}
+
+# Source Code
+source("../bin/DiversityFunctions.R")
+source("../bin/MothurTools.R")
+# Save Default Plot Settings
+opar <- par(no.readonly = TRUE)  # Saves plot defaults
+
+# Required Packages
+require("vegan"); require("stats");require("RColorBrewer")
+require("png"); require("grid");require("reshape"); require("car")
+```
+
+# Import Data File
+```{r}
+design <- read.csv("../data/GS_design.csv")
+
+otu.in <- read.otu("../data/")
+
+tax.in
+
+
+```
