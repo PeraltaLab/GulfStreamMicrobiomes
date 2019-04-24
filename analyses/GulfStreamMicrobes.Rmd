@@ -62,6 +62,15 @@ for(i in 1:dim(otus)[1]){
 
 # Log Transform Relative Abundances
 dataREL.log <- decostand(dataREL, method="log")
+
+cyanos <- tax.in$OTU[grep("Cyano", tax.in$Phylum)]
+heteros <- tax.in$OTU[grep("Cyano", tax.in$Phylum, invert = T)]
+
+dataPA.c <- dataPA[, which(colnames(dataPA) %in% cyanos)]
+dataPA.h <- dataPA[, which(colnames(dataPA) %in% heteros)]
+
+dataREL.c <- dataREL[, which(colnames(dataREL) %in% cyanos)]
+dataREL.h <- dataREL[, which(colnames(dataREL) %in% heteros)]
 ```
 
 # Alpha Diversity
@@ -72,5 +81,30 @@ dataREL.log <- decostand(dataREL, method="log")
 
 # Beta Diversity 
 ```{r}
+# Data Checks
+all.equal(as.character(design$MicroNumber), rownames(dataREL.log))
+
+# Distance Matrix
+dataREL.dist <- vegdist(dataREL.log, method="bray")
+
+# PERMANOVA
+adonis = adonis(dataREL.dist ~ Date2*Dispersal*Salinity, method = "bray", data = csi.full.ns, perm=1000)
+adonis
+
+# Principal Coordinates Analysis - NO SOURCE
+CSI_pcoa1 <- cmdscale(sampleREL.dist1, k=3, eig=TRUE, add=FALSE)
+  # Classical (Metric) Multidimensional Scaling; returns PCoA coordinates
+  # eig=TRUE returns eigenvalues; k = # of dimensions to calculate
+
+explainvar1a <- round(CSI_pcoa1$eig[1] / sum(CSI_pcoa1$eig), 3) * 100
+explainvar2a <- round(CSI_pcoa1$eig[2] / sum(CSI_pcoa1$eig), 3) * 100
+sum.eiga <- sum(explainvar1a, explainvar2a)
+
+explainvar1a #17.3
+explainvar2a #7.3
+
+
+
+
 
 ```
