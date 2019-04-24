@@ -64,6 +64,12 @@ otus <- otus[-c(low), ]
 # Remove odd sites from design
 design.2 <- design[-c(low), ]
 
+# Remove Inshore
+inshore <- design$MicroNumber[which(design$Location == "Inshore")]
+otus <- otus[-c(which(row.names(otus) %in% inshore)), ]
+design.2 <- design.2[-c(which(design.2$MicroNumber %in% inshore)), ]
+design.2$Location <- droplevels(design.2$Location)
+
 # Make Presence Absence Matrix
 dataPA <- (otus > 0) * 1
 dataPA.c <- dataPA[, which(colnames(dataPA) %in% cyanos)]
@@ -109,6 +115,8 @@ dataREL.h2 <- dataREL[, which(colnames(dataREL) %in% heteros)]
 # Data Checks
 all.equal(as.character(design.2$MicroNumber), rownames(dataRELh.log))
 
+# Trts
+table(design.2$Location)
 
 # Distance Matrix
 dataRELh.dist <- vegdist(dataRELh.log, method="bray")
