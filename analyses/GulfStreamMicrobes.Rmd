@@ -75,7 +75,7 @@ dataPA <- (otus > 0) * 1
 dataPA.c <- dataPA[, which(colnames(dataPA) %in% cyanos)]
 dataPA.h <- dataPA[, which(colnames(dataPA) %in% heteros)]
 
-# Make Relative Abundence Matrices
+# Make Relative Abundance Matrices
 otus.c <- otus[, which(colnames(otus) %in% cyanos)]
 otus.h <- otus[, which(colnames(otus) %in% heteros)]
 
@@ -106,8 +106,59 @@ dataREL.h2 <- dataREL[, which(colnames(dataREL) %in% heteros)]
 
 # Alpha Diversity
 ```{r}
+# Rarefy Abundances (min abundance is 89893. We are sampling to 89000)
+min(rowSums(otus))
+GSdata.r <- rrarefy(otus, 89000)
 
+# Fisher's Alpha
+fisher <- fisher.alpha(GSdata.r)
 
+# Species Richness
+#richness <- rowSums((PWESdata.r >= 1))
+richness <- rowSums((otus >= 1))
+
+# Shannon Diversity
+shannon <- diversity(GSdata.r, "shannon")
+
+# Simpson's Evenness
+simp.even <- apply(GSdata.r, 1, simp_even)
+
+#Pielou’s evenness
+J <- shannon/log(specnumber(GSdata.r[,-c(1:1)]))
+
+#combined richness, diversity, evenness
+diversity <- cbind(design.2,richness,shannon,simp.even,J)
+```
+
+#Plot shannon diversity 
+```{r Plot - Shannon Diversity, echo=TRUE}
+require(ggplot2)
+
+# Graphing Shannon Diversity
+p <- ggplot(diversity, aes(x=Location, y=shannon, color=as.factor(Location)))+ scale_color_manual(name="Location", values=c("#333333", "#3399FF","#66CC00" ), labels = c("Epibionts", "GS NO_Sargassum","GS Sargassum")) + stat_summary(fun.data=mean_cl_boot,size=0.75) 
+p1=p+geom_smooth(method="lm")+facet_wrap(~Cruise_date)+facet_grid(. ~Cruise_date)
+p1 + theme_bw() + 
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line=element_line(colour = "black")) + 
+    theme(axis.title=element_text(vjust=1,size=14,face="bold"), axis.text= element_text(size=12),axis.text.x = element_text(vjust=0.65, hjust=1.0, angle=90, size=14), panel.border = element_rect(colour = "black",size=1)) + 
+    theme(axis.ticks.length=unit(0.3,"cm")) + 
+    labs(x = "Location", y = "Shannon Diversity Index (H')") + 
+    theme(strip.text.x = element_text(size=14, face="bold"), strip.text.y = element_text(size=14, face="bold"), strip.background = element_rect(colour="black", fill="white", size=1)) +
+    scale_x_discrete(breaks=c("Epibionts", "NO_Sargassum","Sargassum"), labels=c("Epi", "NO_Sarg","Sarg"))
+  
+ggsave("../figures/shannon.pdf", plot=last_plot(), device=NULL, path=NULL, scale=1, width=NA, height=NA, dpi=300, limitsize=TRUE)
+
+# Graphing Species Richness - 
+p <- ggplot(diversity, aes(x=Location, y=richness, color=as.factor(Location)))+ scale_color_manual(name="Location", values=c("#333333", "#3399FF","#66CC00" ), labels = c("Epibionts", "GS NO_Sargassum","GS Sargassum")) + stat_summary(fun.data=mean_cl_boot,size=0.75) 
+p1=p+geom_smooth(method="lm")+facet_wrap(~Cruise_date)+facet_grid(. ~Cruise_date)
+p1 + theme_bw() + 
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line=element_line(colour = "black")) + 
+    theme(axis.title=element_text(vjust=1,size=14,face="bold"), axis.text= element_text(size=12),axis.text.x = element_text(vjust=0.65, hjust=1.0, angle=90, size=14), panel.border = element_rect(colour = "black",size=1)) + 
+    theme(axis.ticks.length=unit(0.3,"cm")) + 
+    labs(x = "Location", y = "Phylotype Richness") + 
+    theme(strip.text.x = element_text(size=14, face="bold"), strip.text.y = element_text(size=14, face="bold"), strip.background = element_rect(colour="black", fill="white", size=1)) +
+    scale_x_discrete(breaks=c("Epibionts", "NO_Sargassum","Sargassum"), labels=c("Epi", "NO_Sarg","Sarg"))
+  
+ggsave("../figures/richness.pdf", plot=last_plot(), device=NULL, path=NULL, scale=1, width=NA, height=NA, dpi=300, limitsize=TRUE)
 ```
 
 # Beta Diversity 
@@ -124,8 +175,11 @@ dataRELc.dist <- vegdist(dataRELc.log, method="bray")
 
 
 # PERMANOVA
-adonis.h = adonis(dataRELh.dist ~ design.2$Location, method = "bray", perm=1000)
-adonis.c = adonis(dataRELc.dist ~ design.2$Location, method = "bray", perm=1000)
+adonis.h = adonis(dataRELh.dist ~ design.2$Location*design.2$Cruise_date, method = "bray", perm=1000)
+adonis.h
+
+adonis.c = adonis(dataRELc.dist ~ design.2$Location*design.2$Cruise_date, method = "bray", perm=1000)
+adonis.c
 
 adonis(dataRELh.dist ~ design.2$Location * design.2$Cruise_date, method = "bray", perm=1000)
 
