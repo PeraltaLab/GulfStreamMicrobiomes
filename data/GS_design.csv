@@ -1,38 +1,38 @@
-﻿MicroNumber,Cruise_date,Sample_numb,Sample_type,Location
-GS_1,5/10/17,1,grab,Sargassum
-GS_2,5/10/17,3,grab,Sargassum
-GS_3,5/10/17,5,grab,NO_Sargassum
-GS_4,5/10/17,7,grab,NO_Sargassum
-GS_5,5/10/17,9,grab,NO_Sargassum
-GS_6,5/10/17,11,grab,Sargassum
-GS_7,5/10/17,Sarg. 1,epibionts,Epibionts
-GS_8,5/10/17,Sarg. 2,epibionts,Epibionts
-GS_9,5/10/17,Sarg. 3,epibionts,Epibionts
-GS_10,5/10/17,Sarg. boat,epibionts,Epibionts
-GS_11,5/17/17,1,grab,Sargassum
-GS_12,5/17/17,2,grab,NO_Sargassum
-GS_13,5/17/17,3,grab,Sargassum
-GS_14,5/17/17,4,grab,NO_Sargassum
-GS_15,5/17/17,5,grab,Sargassum
-GS_16,5/17/17,Sarg. 1,epibionts,Epibionts
-GS_17,5/17/17,Sarg. 2,epibionts,Epibionts
-GS_18,5/17/17,Sarg. 3,epibionts,Epibionts
-GS_19,8/3/17,1,grab,Sargassum
-GS_20,8/3/17,2,grab,Sargassum
-GS_21,8/3/17,3,grab,Sargassum
-GS_22,8/3/17,4,grab,NO_Sargassum
-GS_23,8/3/17,5,grab,NO_Sargassum
-GS_24,8/3/17,6,grab,NO_Sargassum
-GS_25,8/3/17,Sarg. 1,epibionts,Epibionts
-GS_26,8/3/17,Sarg. 2,epibionts,Epibionts
-GS_27,8/3/17,Sarg. 3,epibionts,Epibionts
-GS_28,11/1/17,1,grab,Sargassum
-GS_29,11/1/17,2,grab,Sargassum
-GS_30,11/1/17,3,grab,Sargassum
-GS_31,11/1/17,4,grab,NO_Sargassum
-GS_32,11/1/17,5,grab,NO_Sargassum
-GS_33,11/1/17,6,grab,NO_Sargassum
-GS_34,11/1/17,7,grab,Inshore
-GS_35,11/1/17,Sarg. 1,epibionts,Epibionts
-GS_36,11/1/17,Sarg. 2,epibionts,Epibionts
-GS_37,11/1/17,Sarg. 3,epibionts,Epibionts
+﻿MicroNumber,Cruise_date,Sample_numb,Sample_type,Location,Latitude,Longitude,chla,ammonia,ortho-P,nitrate,DIN,silicate,NPOC
+GS_1,5/10/17,1,grab,Sargassum,34.93885,-75.43047,0.5798,5.190373179,0.106864642,0.359113853,5.549487031,NA,1.766
+GS_2,5/10/17,3,grab,Sargassum,34.83097,-75.41335,0.45396,4.133735998,0.001588441,0.792477886,4.926213883,NA,1.522
+GS_3,5/10/17,5,grab,NO_Sargassum,34.8328,-75.41349,0.15132,4.469289697,0,0.382674006,4.851963703,NA,1.551
+GS_4,5/10/17,7,grab,NO_Sargassum,34.84709,-75.45316,0.15262,2.377433657,0,0.456210242,2.833643899,NA,1.366
+GS_5,5/10/17,9,grab,NO_Sargassum,34.87183,-75.4942,0.15262,2.94858889,0,0.397666831,3.34625572,NA,1.462
+GS_6,5/10/17,11,grab,Sargassum,34.91949,-75.51249,2.01136,1.756302341,0.004842809,0.564015792,2.320318133,NA,1.55
+GS_7,5/10/17,Sarg. 1,epibionts,Epibionts,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GS_8,5/10/17,Sarg. 2,epibionts,Epibionts,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GS_9,5/10/17,Sarg. 3,epibionts,Epibionts,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GS_10,5/10/17,Sarg. boat,epibionts,Epibionts,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GS_11,5/17/17,1,grab,Sargassum,34.76292,-75.33831,0.85696,1.327935916,0,0.20847166,1.536407576,NA,1.193
+GS_12,5/17/17,2,grab,NO_Sargassum,34.79662,-75.33047,0.85696,1.870533388,0,0.313421434,2.183954822,NA,1.15
+GS_13,5/17/17,3,grab,Sargassum,34.80972,-75.33279,0.55692,1.21370487,0,0.330556091,1.544260961,NA,1.057
+GS_14,5/17/17,4,grab,NO_Sargassum,34.88786,-75.4019,0.30264,1.449306403,0,0.299142553,1.748448957,NA,1.169
+GS_15,5/17/17,5,grab,Sargassum,34.89795,-75.40259,0.55172,1.57067689,0.009007624,0.229176037,1.799852928,NA,1.207
+GS_16,5/17/17,Sarg. 1,epibionts,Epibionts,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GS_17,5/17/17,Sarg. 2,epibionts,Epibionts,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GS_18,5/17/17,Sarg. 3,epibionts,Epibionts,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GS_19,8/3/17,1,grab,Sargassum,34.93024,-75.31412,0.935653333,NA,NA,NA,NA,2.182620925,1.655
+GS_20,8/3/17,2,grab,Sargassum,34.95005,-75.30727,0.571306667,NA,NA,NA,NA,2.54935821,1.462
+GS_21,8/3/17,3,grab,Sargassum,34.96596,-75.28349,0.735626667,NA,NA,NA,NA,2.161257588,1.408
+GS_22,8/3/17,4,grab,NO_Sargassum,35.00446,-75.25121,0,NA,NA,NA,NA,2.54935821,1.261
+GS_23,8/3/17,5,grab,NO_Sargassum,35.02438,-75.2573,0.36608,NA,NA,NA,NA,2.228908155,1.168
+GS_24,8/3/17,6,grab,NO_Sargassum,35.03296,-75.26244,0.367813333,NA,NA,NA,NA,2.364209289,1.221
+GS_25,8/3/17,Sarg. 1,epibionts,Epibionts,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GS_26,8/3/17,Sarg. 2,epibionts,Epibionts,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GS_27,8/3/17,Sarg. 3,epibionts,Epibionts,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GS_28,11/1/17,1,grab,Sargassum,34.90613,-75.39008,0.5785,NA,NA,NA,NA,2.307240391,1.085
+GS_29,11/1/17,2,grab,Sargassum,34.91653,-75.38786,0.42588,NA,NA,NA,NA,2.713143793,1.151
+GS_30,11/1/17,3,grab,Sargassum,34.96004,-75.40553,1.30832,NA,NA,NA,NA,3.59616172,1.832
+GS_31,11/1/17,4,grab,NO_Sargassum,34.98439,-75.41296,0.64688,NA,NA,NA,NA,3.432376137,1.194
+GS_32,11/1/17,5,grab,NO_Sargassum,35.00241,-75.40585,0.5785,NA,NA,NA,NA,3.59616172,1.194
+GS_33,11/1/17,6,grab,NO_Sargassum,35.01035,-75.40053,0.5785,NA,NA,NA,NA,3.108365527,1.166
+GS_34,11/1/17,7,grab,Inshore,35.03989,-75.43687,0.57746,NA,NA,NA,NA,2.353527621,1.124
+GS_35,11/1/17,Sarg. 1,epibionts,Epibionts,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GS_36,11/1/17,Sarg. 2,epibionts,Epibionts,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GS_37,11/1/17,Sarg. 3,epibionts,Epibionts,NA,NA,NA,NA,NA,NA,NA,NA,NA

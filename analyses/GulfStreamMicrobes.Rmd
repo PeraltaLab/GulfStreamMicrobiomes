@@ -37,9 +37,40 @@ require("png"); require("grid");require("reshape"); require("car")
 ```{r}
 design <- read.csv("../data/GS_design.csv")
 
-otu.in <- read.otu("../data/")
+otu.in <- read.otu("../data/phylotype/GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.shared", cutoff = "1")
 
-tax.in
+tax.in <- read.tax("../data/phylotype/GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.1.cons.taxonomy", format = "rdp", tax.levels = 6)
 
+
+tax_raw <- read.delim("../data/phylotype/GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.1.cons.taxonomy", header = F, skip = 1) 
+
+```
+
+# OTU Data Wrangling
+```{r}
+# Remove OTUs with less than two occurences across all sites
+otus <- otu.in[, which(colSums(otu.in) >= 2)]
+
+# Make Presence Absence Matrix
+dataPA <- (otus > 0) * 1
+
+# Make Relative Abundence Matrices
+dataREL <- otus
+for(i in 1:dim(otus)[1]){
+  dataREL[i,] <- otus[i,]/sum(otus[i,])
+}
+
+# Log Transform Relative Abundances
+dataREL.log <- decostand(dataREL, method="log")
+```
+
+# Alpha Diversity
+```{r}
+
+
+```
+
+# Beta Diversity 
+```{r}
 
 ```

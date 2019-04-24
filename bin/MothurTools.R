@@ -37,7 +37,7 @@ read.otu <- function(shared = " ", cutoff = "0.03"){
 
 # Import Taxonomy Information
 read.tax <- function(taxonomy = " ", format = c("rdp", "gg"),
-                     col.tax = "3", tax.levels = "6"){
+                     col.tax = 3, tax.levels = 6){
   tax_raw <- read.delim(taxonomy, header = F, skip = 1)       # load genus-level data
   if (format == "rdp"){
     tax.info <- data.frame(matrix(NA, dim(tax_raw)[1], tax.levels))
