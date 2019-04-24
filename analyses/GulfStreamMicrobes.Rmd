@@ -55,6 +55,15 @@ heteros <- tax.in$OTU[grep("Cyano", tax.in$Phylum, invert = T)]
 # Remove OTUs with less than two occurences across all sites
 otus <- otu.in[, which(colSums(otu.in) >= 2)]
 
+# Remove sites with low coverage
+low <- which(rowSums(otus) < 50000)
+rowSums(otus)[low]
+odd.sites <- row.names(otus)[low]
+otus <- otus[-c(low), ]
+
+# Remove odd sites from design
+design.2 <- design[-c(low), ]
+
 # Make Presence Absence Matrix
 dataPA <- (otus > 0) * 1
 dataPA.c <- dataPA[, which(colnames(dataPA) %in% cyanos)]
@@ -81,6 +90,8 @@ for(i in 1:dim(otus.h)[1]){
 
 # Log Transform Relative Abundances
 dataREL.log <- decostand(dataREL, method="log")
+dataRELc.log <- decostand(dataREL.c, method="log")
+dataRELh.log <- decostand(dataREL.h, method="log")
 
 # Backup: Rel before split
 dataREL.c2 <- dataREL[, which(colnames(dataREL) %in% cyanos)]
@@ -96,13 +107,16 @@ dataREL.h2 <- dataREL[, which(colnames(dataREL) %in% heteros)]
 # Beta Diversity 
 ```{r}
 # Data Checks
-all.equal(as.character(design$MicroNumber), rownames(dataREL.log))
+all.equal(as.character(design.2$MicroNumber), rownames(dataRELh.log))
+
 
 # Distance Matrix
-dataREL.dist <- vegdist(dataREL.log, method="bray")
+dataRELh.dist <- vegdist(dataRELh.log, method="bray")
+dataRELc.dist <- vegdist(dataRELc.log, method="bray")
+
 
 # PERMANOVA
-adonis = adonis(dataREL.dist ~ Date2*Dispersal*Salinity, method = "bray", data = csi.full.ns, perm=1000)
+adonis = adonis(dataRELh.dist ~ Date2*Dispersal*Salinity, method = "bray", data = csi.full.ns, perm=1000)
 adonis
 
 # Principal Coordinates Analysis - NO SOURCE
