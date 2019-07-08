@@ -1,0 +1,38 @@
+﻿MicroNumber,Cruise_date,Sample_numb,Sample_type,Location
+GS_1,5/10/17,1,grab,Sargassum
+GS_2,5/10/17,3,grab,Sargassum
+GS_3,5/10/17,5,grab,NO_Sargassum
+GS_4,5/10/17,7,grab,NO_Sargassum
+GS_5,5/10/17,9,grab,NO_Sargassum
+GS_6,5/10/17,11,grab,Sargassum
+GS_7,5/10/17,Sarg. 1,epibionts,Epibionts
+GS_8,5/10/17,Sarg. 2,epibionts,Epibionts
+GS_9,5/10/17,Sarg. 3,epibionts,Epibionts
+GS_10,5/10/17,Sarg. boat,epibionts,Epibionts
+GS_11,5/17/17,1,grab,Sargassum
+GS_12,5/17/17,2,grab,NO_Sargassum
+GS_13,5/17/17,3,grab,Sargassum
+GS_14,5/17/17,4,grab,NO_Sargassum
+GS_15,5/17/17,5,grab,Sargassum
+GS_16,5/17/17,Sarg. 1,epibionts,Epibionts
+GS_17,5/17/17,Sarg. 2,epibionts,Epibionts
+GS_18,5/17/17,Sarg. 3,epibionts,Epibionts
+GS_19,8/3/17,1,grab,Sargassum
+GS_20,8/3/17,2,grab,Sargassum
+GS_21,8/3/17,3,grab,Sargassum
+GS_22,8/3/17,4,grab,NO_Sargassum
+GS_23,8/3/17,5,grab,NO_Sargassum
+GS_24,8/3/17,6,grab,NO_Sargassum
+GS_25,8/3/17,Sarg. 1,epibionts,Epibionts
+GS_26,8/3/17,Sarg. 2,epibionts,Epibionts
+GS_27,8/3/17,Sarg. 3,epibionts,Epibionts
+GS_28,11/1/17,1,grab,Sargassum
+GS_29,11/1/17,2,grab,Sargassum
+GS_30,11/1/17,3,grab,Sargassum
+GS_31,11/1/17,4,grab,NO_Sargassum
+GS_32,11/1/17,5,grab,NO_Sargassum
+GS_33,11/1/17,6,grab,NO_Sargassum
+GS_34,11/1/17,7,grab,Inshore
+GS_35,11/1/17,Sarg. 1,epibionts,Epibionts
+GS_36,11/1/17,Sarg. 2,epibionts,Epibionts
+GS_37,11/1/17,Sarg. 3,epibionts,Epibionts
