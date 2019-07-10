@@ -37,12 +37,9 @@ require("png"); require("grid");require("reshape"); require("car")
 ```{r}
 design <- read.csv("../data/GS_design.csv")
 
-otu.in <- read.otu("../data/phylotype/GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.shared", cutoff = "1")
+otu.in <- read.otu("../data/GS.bac.final.shared")
 
-tax.in <- read.tax("../data/phylotype/GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.1.cons.taxonomy", format = "rdp", tax.levels = 6)
-
-
-tax_raw <- read.delim("../data/phylotype/GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.1.cons.taxonomy", header = F, skip = 1) 
+tax.in <- read.tax("../data/GS.bac.final.taxonomy", format = "rdp", tax.levels = 6)
 
 ```
 
@@ -55,8 +52,11 @@ heteros <- tax.in$OTU[grep("Cyano", tax.in$Phylum, invert = T)]
 # Remove OTUs with less than two occurences across all sites
 otus <- otu.in[, which(colSums(otu.in) >= 2)]
 
+aa <- (rowSums(otus))
+aa # GS_13 [2181 reads], GS_14 [2749 reads] - removed
+
 # Remove sites with low coverage
-low <- which(rowSums(otus) < 50000)
+low <- which(rowSums(otus) < 5000)
 rowSums(otus)[low]
 odd.sites <- row.names(otus)[low]
 otus <- otus[-c(low), ]
@@ -72,7 +72,7 @@ design.2$Location <- droplevels(design.2$Location)
 
 # Make Presence Absence Matrix
 dataPA <- (otus > 0) * 1
-dataPA.c <- dataPA[, which(colnames(dataPA) %in% cyanos)]
+dataPA.c <- dataPA[, which(colnames(dataPA) %in% cyanos)] #no sequences ??? double check
 dataPA.h <- dataPA[, which(colnames(dataPA) %in% heteros)]
 
 # Make Relative Abundance Matrices
@@ -106,9 +106,9 @@ dataREL.h2 <- dataREL[, which(colnames(dataREL) %in% heteros)]
 
 # Alpha Diversity
 ```{r}
-# Rarefy Abundances (min abundance is 89893. We are sampling to 89000)
+# Rarefy Abundances (min abundance is 69080. We are sampling to 69000)
 min(rowSums(otus))
-GSdata.r <- rrarefy(otus, 89000)
+GSdata.r <- rrarefy(otus, 69000)
 
 # Fisher's Alpha
 fisher <- fisher.alpha(GSdata.r)
@@ -137,28 +137,43 @@ require(ggplot2)
 # Graphing Shannon Diversity
 p <- ggplot(diversity, aes(x=Location, y=shannon, color=as.factor(Location)))+ scale_color_manual(name="Location", values=c("#333333", "#3399FF","#66CC00" ), labels = c("Epibionts", "GS NO_Sargassum","GS Sargassum")) + stat_summary(fun.data=mean_cl_boot,size=0.75) 
 p1=p+geom_smooth(method="lm")+facet_wrap(~Cruise_date)+facet_grid(. ~Cruise_date)
-p1 + theme_bw() + 
+shannon<- p1 + theme_bw() + 
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line=element_line(colour = "black")) + 
     theme(axis.title=element_text(vjust=1,size=14,face="bold"), axis.text= element_text(size=12),axis.text.x = element_text(vjust=0.65, hjust=1.0, angle=90, size=14), panel.border = element_rect(colour = "black",size=1)) + 
     theme(axis.ticks.length=unit(0.3,"cm")) + 
     labs(x = "Location", y = "Shannon Diversity Index (H')") + 
     theme(strip.text.x = element_text(size=14, face="bold"), strip.text.y = element_text(size=14, face="bold"), strip.background = element_rect(colour="black", fill="white", size=1)) +
     scale_x_discrete(breaks=c("Epibionts", "NO_Sargassum","Sargassum"), labels=c("Epi", "NO_Sarg","Sarg"))
-  
-ggsave("../figures/shannon.pdf", plot=last_plot(), device=NULL, path=NULL, scale=1, width=NA, height=NA, dpi=300, limitsize=TRUE)
+shannon  
+
+ggsave("../figures/shannon.png", plot=last_plot(), device=NULL, path=NULL, scale=1, width=7, height=5, dpi=300, limitsize=TRUE)
 
 # Graphing Species Richness - 
 p <- ggplot(diversity, aes(x=Location, y=richness, color=as.factor(Location)))+ scale_color_manual(name="Location", values=c("#333333", "#3399FF","#66CC00" ), labels = c("Epibionts", "GS NO_Sargassum","GS Sargassum")) + stat_summary(fun.data=mean_cl_boot,size=0.75) 
 p1=p+geom_smooth(method="lm")+facet_wrap(~Cruise_date)+facet_grid(. ~Cruise_date)
-p1 + theme_bw() + 
+richness <-p1 + theme_bw() + 
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line=element_line(colour = "black")) + 
     theme(axis.title=element_text(vjust=1,size=14,face="bold"), axis.text= element_text(size=12),axis.text.x = element_text(vjust=0.65, hjust=1.0, angle=90, size=14), panel.border = element_rect(colour = "black",size=1)) + 
     theme(axis.ticks.length=unit(0.3,"cm")) + 
-    labs(x = "Location", y = "Phylotype Richness") + 
+    labs(x = "Location", y = "OTU Richness") + 
     theme(strip.text.x = element_text(size=14, face="bold"), strip.text.y = element_text(size=14, face="bold"), strip.background = element_rect(colour="black", fill="white", size=1)) +
     scale_x_discrete(breaks=c("Epibionts", "NO_Sargassum","Sargassum"), labels=c("Epi", "NO_Sarg","Sarg"))
-  
-ggsave("../figures/richness.pdf", plot=last_plot(), device=NULL, path=NULL, scale=1, width=NA, height=NA, dpi=300, limitsize=TRUE)
+richness  
+ggsave("../figures/richness.png", plot=last_plot(), device=NULL, path=NULL, scale=1, width=7, height=5, dpi=300, limitsize=TRUE)
+
+# Graphing Pielou's Evenness
+p <- ggplot(diversity, aes(x=Location, y=J, color=as.factor(Location)))+ scale_color_manual(name="Location", values=c("#333333", "#3399FF","#66CC00" ), labels = c("Epibionts", "GS NO_Sargassum","GS Sargassum")) + stat_summary(fun.data=mean_cl_boot,size=0.75) 
+p1=p+geom_smooth(method="lm")+facet_wrap(~Cruise_date)+facet_grid(. ~Cruise_date)
+evenness<- p1 + theme_bw() + 
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line=element_line(colour = "black")) + 
+    theme(axis.title=element_text(vjust=1,size=14,face="bold"), axis.text= element_text(size=12),axis.text.x = element_text(vjust=0.65, hjust=1.0, angle=90, size=14), panel.border = element_rect(colour = "black",size=1)) + 
+    theme(axis.ticks.length=unit(0.3,"cm")) + 
+    labs(x = "Location", y = "Pielou's Evenness (J')") + 
+    theme(strip.text.x = element_text(size=14, face="bold"), strip.text.y = element_text(size=14, face="bold"), strip.background = element_rect(colour="black", fill="white", size=1)) +
+    scale_x_discrete(breaks=c("Epibionts", "NO_Sargassum","Sargassum"), labels=c("Epi", "NO_Sarg","Sarg"))
+evenness  
+
+ggsave("../figures/evenness.png", plot=last_plot(), device=NULL, path=NULL, scale=1, width=7, height=5, dpi=300, limitsize=TRUE)
 ```
 
 # Beta Diversity 
@@ -180,8 +195,6 @@ adonis.h
 
 adonis.c = adonis(dataRELc.dist ~ design.2$Location*design.2$Cruise_date, method = "bray", perm=1000)
 adonis.c
-
-adonis(dataRELh.dist ~ design.2$Location * design.2$Cruise_date, method = "bray", perm=1000)
 
 # Principal Coordinates Analysis - NO SOURCE
 pcoa.h <- cmdscale(dataRELh.dist, k=3, eig=TRUE, add=FALSE)
