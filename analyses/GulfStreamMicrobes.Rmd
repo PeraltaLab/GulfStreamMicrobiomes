@@ -46,7 +46,7 @@ tax.in <- read.tax("../data/GS.bac.final.taxonomy", format = "rdp", tax.levels =
 # OTU Data Wrangling
 ```{r}
 # Groupings
-cyanos <- tax.in$OTU[grep("Cyano", tax.in$Phylum)]
+cyanos <- tax.in$OTU[grep("Cyano", tax.in$Phylum)] ### NEED TO FIX - currently no cyanos
 heteros <- tax.in$OTU[grep("Cyano", tax.in$Phylum, invert = T)]
 
 # Remove OTUs with less than two occurences across all sites
@@ -100,8 +100,8 @@ dataRELc.log <- decostand(dataREL.c, method="log")
 dataRELh.log <- decostand(dataREL.h, method="log")
 
 # Backup: Rel before split
-dataREL.c2 <- dataREL[, which(colnames(dataREL) %in% cyanos)]
-dataREL.h2 <- dataREL[, which(colnames(dataREL) %in% heteros)]
+#dataREL.c2 <- dataREL[, which(colnames(dataREL) %in% cyanos)]
+#dataREL.h2 <- dataREL[, which(colnames(dataREL) %in% heteros)]
 ```
 
 # Alpha Diversity
@@ -185,9 +185,10 @@ all.equal(as.character(design.2$MicroNumber), rownames(dataRELh.log))
 table(design.2$Location)
 
 # Distance Matrix
-dataRELh.dist <- vegdist(dataRELh.log, method="bray")
-dataRELc.dist <- vegdist(dataRELc.log, method="bray")
-
+#dataRELh.dist <- vegdist(dataRELh.log, method="bray")
+#dataRELc.dist <- vegdist(dataRELc.log, method="bray")
+dataRELh.dist <- vegdist(dataREL.h, method="bray")
+dataRELc.dist <- vegdist(dataREL.c, method="bray")
 
 # PERMANOVA
 adonis.h = adonis(dataRELh.dist ~ design.2$Location*design.2$Cruise_date, method = "bray", perm=1000)
