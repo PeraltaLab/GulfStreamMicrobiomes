@@ -1,4 +1,4 @@
-Gulf Stream Microbiomes
+Gulf Stream *Sargassum*-asscociated Microbiomes
 =====================
 This repository contains open-source code, data, & text files for the gulf stream microbiomes project
 
@@ -11,7 +11,7 @@ Raw sequence files can be found at NCBI SRA BioProject ID ().
 * **Aim 1)**: Characterize patterns of microbial community composition (bacterioplankton, microeukaryotes) associated with pelagic *Sargassum*
 
 ## Contents
-* **analyses:**: An R Markdown file that includes R script written by Mario Muscarella, Jo Werba, Alexandra Stucy, and Ariane Peralta containing functions used in analysis of soil and microbial sequence data.
+* **analyses:**: An R Markdown file that includes R script written by Mario Muscarella and Ariane Peralta containing functions used in analysis of microbial sequence data.
 
 * **bin:** 
 	* *MothurTools.R*: An R script written by Mario Muscarella. R script contains functions used in the analysis of community sequence data.
@@ -32,4 +32,4 @@ North Carolina Ocean Energy Program
 
 [Dr. Mario Muscarella](mailto:muscarella.mario@uqam.ca) ([website](http://mmuscarella.github.io/)): Postdoctoral Fellow in the [del Giorgio Lab]() and Research Associate II in the Institute of Arctic Biology at the University of Alaska Fairbanks. Analyzed data and interpreted results.
 
-[Dr. Ariane Peralta](mailto:peraltaa@ecu.edu) ([website](www.peraltalab.com/)):  Co-Investigator. Assistant Professor, Department of Biology, East Carolina University. Designed microbiome sampling and lab protocols, analyzed data, and interpreted results.
+[Dr. Ariane Peralta](mailto:peraltaa@ecu.edu) ([website](www.peraltalab.com/)): Co-Investigator. Assistant Professor, Department of Biology, East Carolina University. Designed microbiome sampling and lab protocols, analyzed data, and interpreted results.
