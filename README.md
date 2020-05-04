@@ -22,14 +22,14 @@ Raw sequence files can be found at NCBI SRA BioProject ID ().
 
 * **mothur:**: Files containing script for bioinformatic analysis of 16S rRNA gene sequences (Illumina MiSeq platform) using mothur pipeline.
 
-
 ## Funding Sources  
 North Carolina Ocean Energy Program
 
 ## Contributors
-[Dr. Lindsay Dubbs](mailto:dubbs@email.unc.edu)([website](https://www.coastalstudiesinstitute.org/faculty-and-staff/dr-lindsay-dubbs/)): Principle Investigator, Research Assistant Professor Co-Director, Outer Banks Field Site, Institute for the Environment, UNC-Chapel Hill. Lead Investigator. Lead and funded examination pelagic Sargassum community primary productivity and nutrient cycling.
+[Dr. Lindsay Dubbs](mailto:dubbs@email.unc.edu)([website](https://www.coastalstudiesinstitute.org/faculty-and-staff/dr-lindsay-dubbs/)): Principal Investigator, Research Assistant Professor Co-Director, Outer Banks Field Site, Institute for the Environment, University of North Carolina-Chapel Hill. Led and funded examination pelagic Sargassum community primary productivity and nutrient cycling in the Gulf Stream.
+
+[Claire Johnson](mailto:clairejo@unc.edu): Co-Investigator, Graduate Student in the Environment, Ecology, and Energy Program, University of North Carolina-Chapel Hill. Member of the Dubbs Lab. Institute for the Environment, UNC-Chapel Hill. Led and conducted field sampling and processing to study nutrient cycling and nitrogen fixation by the Sargassum community in the Gulf Stream.
 
 [Dr. Mario Muscarella](mailto:muscarella.mario@uqam.ca) ([website](http://mmuscarella.github.io/)): Postdoctoral Fellow in the [del Giorgio Lab]() and Research Associate II in the Institute of Arctic Biology at the University of Alaska Fairbanks. Analyzed data and interpreted results.
 
-[Dr. Ariane Peralta](mailto:peraltaa@ecu.edu) ([website](www.peraltalab.com/)): Assistant Professor, Department of Biology, East Carolina University. Co-Investigator. Designed microbiome sampling and lab protocols, analyzed data, and interpreted results.
-
+[Dr. Ariane Peralta](mailto:peraltaa@ecu.edu) ([website](www.peraltalab.com/)):  Co-Investigator. Assistant Professor, Department of Biology, East Carolina University. Designed microbiome sampling and lab protocols, analyzed data, and interpreted results.
