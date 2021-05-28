@@ -32,4 +32,4 @@ North Carolina Ocean Energy Program
 
 [Dr. Mario Muscarella](http://mmuscarella.github.io/): Assistant Professor, Institute or Arctic Biology, University of Alaska Fairbanks. Principal Investigator of the Muscarella Lab. Analyzed data and interpreted results.
 
-[Dr. Ariane Peralta](mailto:peraltaa@ecu.edu) ([website](www.peraltalab.com/)): Co-Investigator. Assistant Professor, Department of Biology, East Carolina University. Designed microbiome sampling and lab protocols, analyzed data, and interpreted results.
+[Dr. Ariane Peralta](mailto:peraltaa@ecu.edu) ([website](www.peraltalab.com/)): Co-Investigator. Associate Professor, Department of Biology, East Carolina University. Designed microbiome sampling and lab protocols, analyzed data, and interpreted results.
