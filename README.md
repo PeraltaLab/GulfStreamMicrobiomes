@@ -30,6 +30,6 @@ North Carolina Ocean Energy Program
 
 [Claire Johnson](mailto:clairejo@unc.edu): Co-Investigator, Graduate Student in the Environment, Ecology, and Energy Program, University of North Carolina-Chapel Hill. Member of the Dubbs Lab. Institute for the Environment, UNC-Chapel Hill. Led and conducted field sampling and processing to study nutrient cycling and nitrogen fixation by the *Sargassum* community in the Gulf Stream.
 
-[Dr. Mario Muscarella](mailto:muscarella.mario@uqam.ca) ([website](http://mmuscarella.github.io/)): Postdoctoral Fellow in the [del Giorgio Lab]() and Research Associate II in the Institute of Arctic Biology at the University of Alaska Fairbanks. Analyzed data and interpreted results.
+[Dr. Mario Muscarella](http://mmuscarella.github.io/): Assistant Professor, Institute or Arctic Biology, University of Alaska Fairbanks. Principal Investigator of the Muscarella Lab. Analyzed data and interpreted results.
 
 [Dr. Ariane Peralta](mailto:peraltaa@ecu.edu) ([website](www.peraltalab.com/)): Co-Investigator. Assistant Professor, Department of Biology, East Carolina University. Designed microbiome sampling and lab protocols, analyzed data, and interpreted results.
