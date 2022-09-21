@@ -1,40 +1,61 @@
-# Last Update 7-02-2019 MEM; GS; Run on Rosalind; mothur v 1.41.3
-make.contigs(file=GS.files, processors=8, inputdir=../raw/, outputdir=../analysis/)
-summary.seqs(fasta=GS.trim.contigs.fasta, inputdir=../analysis/, processors=8)
-trim.seqs(fasta=GS.trim.contigs.fasta, oligos=../raw/GS.oligos)
-summary.seqs(fasta=GS.trim.contigs.trim.fasta, inputdir=../analysis/)
-screen.seqs(fasta=GS.trim.contigs.trim.fasta, group=GS.contigs.groups, summary=GS.trim.contigs.trim.summary, maxambig=0, maxlength=400, minlength=300, maxhomop=8)
-summary.seqs(fasta=GS.trim.contigs.trim.good.fasta, processors=8)
-unique.seqs(fasta=GS.trim.contigs.trim.good.fasta)
-count.seqs(name=GS.trim.contigs.trim.good.names, group=GS.contigs.good.groups)
-summary.seqs(fasta=GS.trim.contigs.trim.good.unique.fasta, count=GS.trim.contigs.trim.good.count_table)
-align.seqs(fasta=GS.trim.contigs.trim.good.unique.fasta, reference=~/SILVA_dbs/silva.v4v5.fasta, processors=8)
-summary.seqs(fasta=GS.trim.contigs.trim.good.unique.align, count=GS.trim.contigs.trim.good.count_table)
-screen.seqs(fasta=GS.trim.contigs.trim.good.unique.align, count=GS.trim.contigs.trim.good.count_table, summary=GS.trim.contigs.trim.good.unique.summary, start=4000, end=17500, maxhomop=8, minlength=350)
-summary.seqs(fasta=GS.trim.contigs.trim.good.unique.good.align, count=GS.trim.contigs.trim.good.good.count_table)
-filter.seqs(fasta=GS.trim.contigs.trim.good.unique.good.align, vertical=T, trump=.)
-summary.seqs(fasta=GS.trim.contigs.trim.good.unique.good.filter.fasta, count=GS.trim.contigs.trim.good.good.count_table)
-unique.seqs(fasta=GS.trim.contigs.trim.good.unique.good.filter.fasta, count=GS.trim.contigs.trim.good.good.count_table)
-pre.cluster(fasta=GS.trim.contigs.trim.good.unique.good.filter.unique.fasta, count=GS.trim.contigs.trim.good.unique.good.filter.count_table, diffs=2)
-summary.seqs(fasta=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.fasta, count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.count_table)
-chimera.vsearch(fasta=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.fasta, count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.count_table, dereplicate=t)
-remove.seqs(fasta=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.fasta,count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.count_table, accnos=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.denovo.vsearch.accnos)
-summary.seqs(fasta=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.fasta, count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.count_table)
-classify.seqs(fasta=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.fasta, count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.count_table, reference=~/SILVA_dbs/trainset16_022016.pds/trainset16_022016.pds.fasta, taxonomy=.~/SILVA_dbs/trainset16_022016.pds/trainset16_022016.pds.tax, cutoff=80)
-summary.tax(taxonomy=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.taxonomy, count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.count_table)
-remove.lineage(fasta=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.fasta, count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.count_table, taxonomy=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.taxonomy, taxon=Chloroplast-Mitochondria-unknown-Archaea-Eukaryota)
-summary.tax(taxonomy=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.taxonomy, count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.pick.count_table)
-cluster.split(fasta=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pick.fasta, count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.pick.count_table, taxonomy=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.taxonomy, splitmethod=classify, taxlevel=4, cutoff=0.03, processors=8)
-make.shared(list=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pick.opti_mcc.list, count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.pick.count_table, label=0.03)
-classify.otu(list=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pick.opti_mcc.list count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.pick.count_table, taxonomy=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.taxonomy, label=0.03)
-get.oturep(list=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pick.opti_mcc.list, fasta=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pick.fasta, count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.pick.count_table, method=abundance, label=0.03)
-system(cp ./GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pick.opti_mcc.shared ./GS.bac.final.shared)
-system(cp ./GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pick.opti_mcc.0.03.cons.taxonomy ./GS.bac.final.taxonomy)
-system(cp ./GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pick.opti_mcc.0.03.rep.fasta ./GS.bac.final.rep.fasta)
-phylotype(taxonomy=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.taxonomy)
-make.shared(list=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.list, count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.pick.count_table, label=1)
-classify.otu(list=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.list, count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.pick.count_table, taxonomy=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.taxonomy, label=1)
-get.oturep(list=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.list, fasta=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pick.fasta, count=GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.pick.count_table, method=abundance, label=1)
-system(cp ./GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.shared ./GS.bac.tax.final.shared)
-system(cp ./GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.1.cons.taxonomy ./GS.bac.tax.final.taxonomy)
-system(cp ./GS.trim.contigs.trim.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.1.rep.fasta ./GS.bac.tax.final.rep.fasta)
+# Gulf Stream 2017 16S Analysis: Last Update, 09-Aug-22 MEM, Rita, Mothur: 1.48.0
+# Load Mothur (Rita): export PATH=$PATH:/usr/local/MOTHUR/bin:/usr/local/MOTHUR/tools
+#
+# make.file(inputdir=../raw/, outputdir=../analysis, type=gz, prefix=GS) Only run this once and then clean it up and rename as needed 
+# Edit GS.files after running to make any adjustments
+#
+
+make.contigs(file=../analysis/GS.files, oligos=../analysis/GS.oligos, processors=8, inputdir=../raw/, outputdir=../analysis/)
+summary.seqs(fasta=GS.trim.contigs.fasta, count=GS.contigs.count_table, inputdir=../analysis/, processors=8)
+screen.seqs(fasta=GS.trim.contigs.fasta, count=GS.contigs.count_table, summary=GS.trim.contigs.summary, maxambig=0, maxlength=400, minlength=300, maxhomop=8)
+summary.seqs(fasta=GS.trim.contigs.good.fasta, count=GS.contigs.good.count_table, processors=8)
+unique.seqs(fasta=GS.trim.contigs.good.fasta, count=GS.contigs.good.count_table)
+summary.seqs(fasta=GS.trim.contigs.good.unique.fasta, count=GS.trim.contigs.good.count_table)
+count.groups(count=GS.trim.contigs.good.count_table)
+align.seqs(fasta=GS.trim.contigs.good.unique.fasta, reference=../../dbs/silva_v132.v4v5.fasta, processors=8)
+summary.seqs(fasta=GS.trim.contigs.good.unique.align, count=GS.trim.contigs.good.count_table, processors=8)
+screen.seqs(fasta=GS.trim.contigs.good.unique.align, count=GS.trim.contigs.good.count_table, summary=GS.trim.contigs.good.unique.summary, start=1900, end=15000, maxhomop=8, minlength=350)
+summary.seqs(fasta=GS.trim.contigs.good.unique.good.align, count=GS.trim.contigs.good.good.count_table)
+filter.seqs(fasta=GS.trim.contigs.good.unique.good.align, vertical=T, trump=.)
+summary.seqs(fasta=GS.trim.contigs.good.unique.good.filter.fasta, count=GS.trim.contigs.good.good.count_table, processors=8)
+unique.seqs(fasta=GS.trim.contigs.good.unique.good.filter.fasta, count=GS.trim.contigs.good.good.count_table)
+pre.cluster(fasta=GS.trim.contigs.good.unique.good.filter.unique.fasta, count=GS.trim.contigs.good.unique.good.filter.count_table, diffs=2)
+summary.seqs(fasta=GS.trim.contigs.good.unique.good.filter.unique.precluster.fasta, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.count_table)
+chimera.vsearch(fasta=GS.trim.contigs.good.unique.good.filter.unique.precluster.fasta, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.count_table, dereplicate=t, processors=8)
+summary.seqs(fasta=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.fasta, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.count_table, processors=8)
+classify.seqs(fasta=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.fasta, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.count_table, reference=../../dbs/trainset18_062020.rdp.fasta, taxonomy=../../dbs/trainset18_062020.rdp.tax, cutoff=80)
+
+summary.tax(taxonomy=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.rdp.wang.taxonomy, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.count_table)
+
+
+remove.lineage(fasta=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.fasta, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.count_table, taxonomy=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.rdp.wang.taxonomy, taxon=Chloroplast-Mitochondria-unknown-Eukaryota)
+
+
+summary.tax(taxonomy=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.rdp.wang.pick.taxonomy, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.count_table)
+
+
+cluster.split(fasta=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.fasta, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.count_table, taxonomy=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.rdp.wang.pick.taxonomy, splitmethod=classify, taxlevel=4, cutoff=0.03, processors=8)
+
+
+make.shared(list=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.opti_mcc.list, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.count_table, label=0.03)
+
+classify.otu(list=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.opti_mcc.list, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.count_table, taxonomy=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.rdp.wang.pick.taxonomy, label=0.03)
+
+get.oturep(list=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.opti_mcc.list, fasta=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.fasta, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.count_table, method=abundance, label=0.03)
+
+
+
+
+system(cp ./GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.opti_mcc.shared ./GS.bac.final.shared)
+system(cp ./GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.opti_mcc.0.03.cons.taxonomy ./GS.bac.final.taxonomy)
+system(cp ./GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.opti_mcc.0.03.rep.fasta ./GS.bac.final.rep.fasta)
+
+
+
+phylotype(taxonomy=GS.trim.contigs.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.taxonomy)
+make.shared(list=GS.trim.contigs.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.list, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.pick.count_table, label=1)
+classify.otu(list=GS.trim.contigs.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.list, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.pick.count_table, taxonomy=GS.trim.contigs.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.taxonomy, label=1)
+get.oturep(list=GS.trim.contigs.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.list, fasta=GS.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta, count=GS.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.pick.count_table, method=abundance, label=1)
+system(cp ./GS.trim.contigs.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.shared ./GS.bac.tax.final.shared)
+system(cp ./GS.trim.contigs.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.1.cons.taxonomy ./GS.bac.tax.final.taxonomy)
+system(cp ./GS.trim.contigs.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.tx.1.rep.fasta ./GS.bac.tax.final.rep.fasta)
